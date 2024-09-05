@@ -1,0 +1,58 @@
+// Load messages from JSON file
+fetch('assets/messages.json')
+    .then(response => response.json())
+    .then(data => {
+        const messages = data;
+
+        // Initialize chatbot
+        const chatMessages = document.querySelector('.chat-messages');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');   
+
+
+        // Send   
+ message function
+        function sendMessage() {
+            const message = messageInput.value;
+            if (message.trim() !== '') {
+                // Create user message element
+                const userMessage = document.createElement('div');
+                userMessage.classList.add('chat-message', 'user');
+                userMessage.textContent = message;
+                chatMessages.appendChild(userMessage);
+
+                // Simulate bot response (replace with actual chatbot logic)
+                const botResponse = messages.find(msg => msg.input.toLowerCase() === message.toLowerCase());
+                if (botResponse) {
+                    const botMessage = document.createElement('div');
+                    botMessage.classList.add('chat-message', 'bot');
+                    botMessage.textContent = botResponse.output;
+                    chatMessages.appendChild(botMessage);
+                } else {
+                    const botMessage = document.createElement('div');
+                    botMessage.classList.add('chat-message', 'bot');
+                    botMessage.textContent = "I couldn't find a suitable response for that.";
+                    chatMessages.appendChild(botMessage);
+                }
+
+                // Scroll to bottom of chat messages
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                // Clear message input
+                messageInput.value = '';
+            }
+        }
+
+        // Event listener for send button
+        sendButton.addEventListener('click', sendMessage);
+
+        // Event listener for Enter key press
+        messageInput.addEventListener('keydown', event => {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    })
+    .catch(error => {
+        console.error('Error loading messages:', error);
+    });
