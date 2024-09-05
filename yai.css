@@ -1,0 +1,41 @@
+/* Customize the appearance of the chatbot */
+.chatbox {
+    width: 400px;
+    height: 500px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: scroll;
+}
+
+.chat-messages {
+    height: 80%;
+    overflow-y: auto;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+}
+
+.chat-message.user {
+    text-align: right;
+    background-color: #f2f2f2;
+}
+
+.chat-message.bot {
+    text-align: left;
+    background-color: #e6e6e6;
+}
+
+.chat-input {
+    display: flex;
+    align-items: center;
+}
+
+#message-input {
+    flex: 1;
+    padding: 5px;
+}
+
+#send-button {
+    padding: 5px 10px;
+}
